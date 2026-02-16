@@ -65,11 +65,9 @@ with col2:
 
     if "model" not in st.session_state:
         train()
-        # st.session_state["model"] = ParagraphEmbedder(vocab_size=vocab_size, emb_dim=embedding_dimensions)
 
     if st.sidebar.button("Train"):
         train()
-        # st.session_state["model"] = ParagraphEmbedder(vocab_size=vocab_size, emb_dim=embedding_dimensions)
 
     # ==================== Model application ====================
     with torch.no_grad():

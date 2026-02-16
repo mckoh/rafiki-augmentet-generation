@@ -66,7 +66,7 @@ class TripletDataset(Dataset):
 class LightningParagraphEmbedder(L.LightningModule):
     def __init__(self, vocab_size, pad_id, emb_dim=3, lr=1e-3):
         super().__init__()
-        self.model = ParagraphEmbedder(vocab_size)
+        self.model = ParagraphEmbedder(vocab_size, emb_dim=emb_dim)
         self.pad_id = pad_id
         self.lr = lr
         self.loss = []
