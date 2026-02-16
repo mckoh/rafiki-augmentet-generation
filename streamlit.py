@@ -19,7 +19,7 @@ st.set_page_config(
 )
 
 st.sidebar.title("Rafiki Augmented Generation")
-question = st.sidebar.text_area("Frage eingeben", "Schneller Schoko‑Becherkuchen in der Tasse mit Mehl, Kakao, Zucker, Backpulver, und Schokostückchen für die Mikrowelle", height="content")
+question = st.sidebar.text_area("Frage eingeben", "Junge Löwenprinz Simba aus Der König der Löwen, der Sohn von Mufasa der mit Timon und Pumbaa neue Freunde findet und Herrscher wird.", height="content")
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 1000, 500)
 
