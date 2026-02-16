@@ -24,7 +24,7 @@ question = st.sidebar.text_area("Frage eingeben", "Junge Löwenprinz Simba aus D
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
-tab1, tab2, tab3, tab4 = st.tabs(["🧠 Wissensschatz", "📈 Darstellung", "📋 Embeddings", "↔ Vergleich"])
+tab1, tab2, tab3, tab4 = st.tabs(["🧠 Wissensschatz", "📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
 
 with tab1:
     doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz und die zentrale Figur in Der König der Löwen. Als Sohn von Mufasa wächst Simba mit dem Gefühl auf, eines Tages König des Geweihten Landes zu werden. Nach dem Verlust seines Vaters flieht er, findet jedoch mit Timon und Pumbaa neue Freunde. Simbas Entwicklung vom sorglosen Jungtier zum verantwortungsvollen Herrscher bildet den Kern der Geschichte.", height="content")
@@ -72,7 +72,7 @@ with torch.no_grad():
     question_embeddings = st.session_state["model"](encoded_question)
 
 # ==================== Visualization ====================
-with tab2:
+with tab3:
     points = document_embeddings.numpy()
     qpoints = question_embeddings.numpy()
     fig, ax = plt.subplots()
@@ -85,7 +85,7 @@ with tab2:
     ax.text(qpoints[0, 0], qpoints[0, 1], qpoints[0, 2], f"Q", fontsize=10)
     st.pyplot(fig)
 
-with tab3:
+with tab2:
     st.header("Embeddings der Dokumente")
     st.write(document_embeddings)
     st.header("Embeddings der Frage")
