@@ -91,7 +91,7 @@ with col2:
         st.pyplot(fig)
 
     with tab2:
-        cols = [f"Dimension {i}" for i in range(len(document_embeddings))]
+        cols = [f"Dimension {i}" for i in range(len(document_embeddings[0]))]
         st.header("Embeddings der Dokumente")
         df1 = DataFrame(document_embeddings)
         #df1.columns = cols
