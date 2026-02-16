@@ -77,8 +77,8 @@ with col2:
 
     # ==================== Visualization ====================
     with tab3:
-        points = document_embeddings.numpy()
-        qpoints = question_embeddings.numpy()
+        points = document_embeddings
+        qpoints = question_embeddings
         fig, ax = plt.subplots()
         ax.set_axis_off()
         ax = fig.add_subplot(111, projection='3d')
