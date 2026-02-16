@@ -95,6 +95,7 @@ with col2:
         st.header("Embeddings der Dokumente")
         df1 = DataFrame(document_embeddings)
         #df1.columns = cols
+        st.write(cols)
         st.write(df1)
 
         st.header("Embeddings der Frage")
