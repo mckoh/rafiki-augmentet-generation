@@ -101,7 +101,6 @@ with col2:
         ax.spines['bottom'].set_visible(False)
 
         all_embeddings = concat([question_embeddings, document_embeddings])
-        st.write(all_embeddings)
         Z = hierarchy.linkage(all_embeddings, method="ward")
         hierarchy.dendrogram(Z, orientation='left', ax=ax, labels=["Frage"] + [f"D{i}" for i in range(1, len(all_embeddings))])
         st.pyplot(fig)
