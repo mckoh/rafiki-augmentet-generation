@@ -25,7 +25,6 @@ embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
 col1, col2 = st.columns(2)
-tab2, tab3, tab4 = st.tabs(["📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
 
 with col1:
     doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz der vom sorglosen Jungtier zum verantwortungsvollen Herrscher wird.", height="content")
@@ -34,6 +33,8 @@ with col1:
     doc4 = st.text_area("Dokument 4", "Timon ist ein Erdmännchen und wird durch den Spruch Hakuna Matata berühmt.", height="content")
 
 with col2:
+    tab2, tab3, tab4 = st.tabs(["📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
+
     # ==================== Model Training ====================
     documents = [doc1, doc2, doc3, doc4]
     vocab, vocab_size = build_vocab(documents)
