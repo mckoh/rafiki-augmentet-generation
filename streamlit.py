@@ -20,7 +20,7 @@ st.set_page_config(
 
 st.sidebar.title("Rafiki Augmented Generation")
 
-question = st.sidebar.text_area("Frage eingeben", "Simba, der junge Löwenprinz und die zentrale Figur in Der König der Löwen der eines Tages König des Geweihten Landes werden soll und neue Freunde findet um dann ein verantwortungsvollen Herrscher zu werden.", height="content")
+question = st.sidebar.text_area("Frage eingeben", "Der junge Löwenprinz in Der König der Löwen der eines Tages König des Geweihten Landes werden soll, neue Freunde findet um dann ein verantwortungsvollen Herrscher zu werden.", height="content")
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
