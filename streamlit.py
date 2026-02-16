@@ -20,14 +20,14 @@ st.set_page_config(
 
 st.sidebar.title("Rafiki Augmented Generation")
 
-question = st.sidebar.text_area("Frage eingeben", "Junge Löwenprinz Simba aus Der König der Löwen, der Sohn von Mufasa der mit Timon und Pumbaa neue Freunde findet und Herrscher wird.", height="content")
+question = st.sidebar.text_area("Frage eingeben", "Simba, der junge Löwenprinz und die zentrale Figur in Der König der Löwen der eines Tages König des Geweihten Landes werden soll und neue Freunde findet um dann ein verantwortungsvollen Herrscher zu werden.", height="content")
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
 tab1, tab2, tab3, tab4 = st.tabs(["🧠 Wissensschatz", "📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
 
 with tab1:
-    doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz und die zentrale Figur in Der König der Löwen. Als Sohn von Mufasa wächst Simba mit dem Gefühl auf, eines Tages König des Geweihten Landes zu werden. Nach dem Verlust seines Vaters flieht er, findet jedoch mit Timon und Pumbaa neue Freunde. Simbas Entwicklung vom sorglosen Jungtier zum verantwortungsvollen Herrscher bildet den Kern der Geschichte.", height="content")
+    doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz und die zentrale Figur in Der König der Löwen. Als Sohn des Königs wächst Simba mit dem Gefühl auf, eines Tages König des Geweihten Landes zu werden. Nach dem Verlust seines Vaters flieht er, findet jedoch neue Freunde. Simbas Entwicklung vom sorglosen Jungtier zum verantwortungsvollen Herrscher bildet den Kern der Geschichte.", height="content")
     doc2 = st.text_area("Dokument 2", "Mufasa ist der weise und gerechte König des Geweihten Landes. Er verfügt über eine starke, majestätische Präsenz und lehrt Simba wichtige Werte wie Verantwortung und Mut. Seine berühmte Vorstellung vom „Kreis des Lebens“ prägt die Welt von Der König der Löwen. Obwohl Mufasa früh stirbt, bleibt er durch Simbas Erinnerungen und seine spirituelle Erscheinung eine Leitfigur.", height="content")
     doc3 = st.text_area("Dokument 3", "Scar ist Mufasas Bruder und der Hauptantagonist der Geschichte. Er ist intelligent, manipulativ und verfolgt skrupellos das Ziel, selbst König zu werden. Durch eine Intrige, in deren Folge Mufasa stirbt und Simba flieht, reißt Scar die Herrschaft an sich. Unter seiner Regentschaft verfällt das Geweihte Land, da er die natürlichen Regeln des Lebens ignoriert.", height="content")
     doc4 = st.text_area("Dokument 4", "Timon, ein Erdmännchen, und Pumbaa, ein Warzenschwein, sind ein humorvolles Duo, das Simba nach seiner Flucht aufnimmt. Sie leben nach dem Motto „Hakuna Matata“, das sie Simba beibringen. Dieses Lebensprinzip hilft Simba zunächst, seine Sorgen zu vergessen, stellt aber später ein Hindernis dar, als er sich seiner Verantwortung stellen muss. Timon und Pumbaa bleiben Simbas treue Freunde und unterstützen ihn im finalen Kampf.", height="content")
