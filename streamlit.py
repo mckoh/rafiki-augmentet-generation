@@ -19,9 +19,9 @@ st.set_page_config(
 )
 
 st.sidebar.title("Rafiki Augmented Generation")
-question = st.sidebar.text_area("Frage eingeben", "Schneller Schoko‑Becherkuchen in der Tasse mit Mehl, Kakao, Zucker, Backpulver, und Schokostückchen für die Mikrowelle", height="content")
+question = st.sidebar.text_area("Frage eingeben", "Wer wurde durch das Motto Hakuna Matata bekannt?", height="content")
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
-epochs = st.sidebar.slider("Epochen", 1, 1000, 500)
+epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
 tab1, tab2, tab3, tab4 = st.tabs(["🧠 Wissensschatz", "📈 Darstellung", "📋 Embeddings", "↔ Vergleich"])
 
