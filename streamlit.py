@@ -11,6 +11,8 @@ from numpy import concat
 from torch.utils.data import DataLoader
 
 
+st.set_page_config(title="Rafiki Augmented Generation")
+
 st.sidebar.title("Rafiki Augmented Generation")
 question = st.sidebar.text_area("Frage eingeben", "Schneller Schoko‑Becherkuchen in der Tasse mit Mehl, Kakao, Zucker, Backpulver, und Schokostückchen für die Mikrowelle", height="content")
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
