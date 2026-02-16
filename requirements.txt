@@ -1,0 +1,7 @@
+streamlit
+torch
+lightning
+numpy
+matplotlib
+jupyter
+scipy
