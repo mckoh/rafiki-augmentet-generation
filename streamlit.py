@@ -72,8 +72,8 @@ with col2:
 
     # ==================== Model application ====================
     with torch.no_grad():
-        document_embeddings = st.session_state["model"](encoded_documents)
-        question_embeddings = st.session_state["model"](encoded_question)
+        document_embeddings = st.session_state["model"](encoded_documents).numpy()
+        question_embeddings = st.session_state["model"](encoded_question).numpy()
 
     # ==================== Visualization ====================
     with tab3:
