@@ -35,7 +35,7 @@ with col1:
     doc4 = st.text_area("Dokument 4", "Timon ist ein Erdmännchen und wird durch den Spruch Hakuna Matata berühmt.", height="content")
 
 with col2:
-    tab2, tab3, tab4 = st.tabs(["📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
+    tab2, tab3, tab4 = st.tabs(["📋 Embeddings", "📈 Darstellung", "🔬 Vergleich"])
 
     # ==================== Model Training ====================
     documents = [doc1, doc2, doc3, doc4]
