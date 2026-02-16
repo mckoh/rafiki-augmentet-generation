@@ -11,7 +11,12 @@ from numpy import concat
 from torch.utils.data import DataLoader
 
 
-st.set_page_config(title="Rafiki Augmented Generation")
+st.set_page_config(
+    page_title="Rafiki Augmented Generation",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 st.sidebar.title("Rafiki Augmented Generation")
 question = st.sidebar.text_area("Frage eingeben", "Schneller Schoko‑Becherkuchen in der Tasse mit Mehl, Kakao, Zucker, Backpulver, und Schokostückchen für die Mikrowelle", height="content")
