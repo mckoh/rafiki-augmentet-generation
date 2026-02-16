@@ -2,6 +2,7 @@ import streamlit as st
 import torch
 import torch.nn as nn
 import lightning as L
+from pandas import DataFrame
 
 from functions import build_vocab, encode, PAD_ID
 from embedder import ParagraphEmbedder, TripletDataset, LightningParagraphEmbedder
@@ -90,10 +91,16 @@ with col2:
         st.pyplot(fig)
 
     with tab2:
+        cols = [f"Dimension {i}" for i in range(len(document_embeddings))]
         st.header("Embeddings der Dokumente")
-        st.write(document_embeddings)
+        df1 = DataFrame(document_embeddings)
+        df1.columns(cols)
+        st.write(df1)
+
         st.header("Embeddings der Frage")
-        st.write(question_embeddings)
+        df2 = DataFrame(question_embeddings)
+        df2.columns = cols
+        st.write(df2)
 
     with tab4:
         fig, ax = plt.subplots()
