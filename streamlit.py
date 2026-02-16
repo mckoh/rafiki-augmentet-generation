@@ -20,88 +20,90 @@ st.set_page_config(
 
 st.sidebar.title("Rafiki Augmented Generation")
 
-question = st.sidebar.text_area("Frage eingeben", "Der junge Löwenprinz.", height="content")
+question = st.sidebar.text_area("Frage eingeben", "Der junge Löwenprinz der vom sorglosen Jungtier zum Herrscher wird.", height="content")
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
-tab1, tab2, tab3, tab4 = st.tabs(["🧠 Wissensschatz", "📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
+col1, col2 = st.columns(2)
+tab2, tab3, tab4 = st.tabs(["📋 Embeddings", "📈 Darstellung", "↔ Vergleich"])
 
-with tab1:
+with col1:
     doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz der vom sorglosen Jungtier zum verantwortungsvollen Herrscher wird.", height="content")
     doc2 = st.text_area("Dokument 2", "Mufasa ist der König des Geweihten Landes. Er verfügt über eine starke, majestätische Präsenz.", height="content")
     doc3 = st.text_area("Dokument 3", "Scar ist der böse Onkel, der selbst zum König werden will.", height="content")
     doc4 = st.text_area("Dokument 4", "Timon ist ein Erdmännchen und wird durch den Spruch Hakuna Matata berühmt.", height="content")
 
-# ==================== Model Training ====================
-documents = [doc1, doc2, doc3, doc4]
-vocab, vocab_size = build_vocab(documents)
-max_len = max(len(document.split()) for document in documents)
+with col2:
+    # ==================== Model Training ====================
+    documents = [doc1, doc2, doc3, doc4]
+    vocab, vocab_size = build_vocab(documents)
+    max_len = max(len(document.split()) for document in documents)
 
-encoded_documents = [encode(document, vocab, max_len=max_len) for document in documents]
-encoded_documents = torch.tensor(encoded_documents)
+    encoded_documents = [encode(document, vocab, max_len=max_len) for document in documents]
+    encoded_documents = torch.tensor(encoded_documents)
 
-encoded_question = [encode(question, vocab, max_len=max_len)]
-encoded_question = torch.tensor(encoded_question)
-
-
-def train():
-    dataset = TripletDataset(encoded_documents)
-    loader = DataLoader(dataset, batch_size=vocab_size, shuffle=True)
-    st.session_state["model"] = LightningParagraphEmbedder(
-        vocab_size=vocab_size,
-        pad_id=PAD_ID,
-        emb_dim=embedding_dimensions,
-        lr=0.01
-    )
-
-    st.session_state["trainer"] = L.Trainer(max_epochs=epochs, enable_checkpointing=False, logger=False)
-    st.session_state["trainer"].fit(st.session_state["model"], loader)
+    encoded_question = [encode(question, vocab, max_len=max_len)]
+    encoded_question = torch.tensor(encoded_question)
 
 
-if "model" not in st.session_state:
-    train()
-    # st.session_state["model"] = ParagraphEmbedder(vocab_size=vocab_size, emb_dim=embedding_dimensions)
+    def train():
+        dataset = TripletDataset(encoded_documents)
+        loader = DataLoader(dataset, batch_size=vocab_size, shuffle=True)
+        st.session_state["model"] = LightningParagraphEmbedder(
+            vocab_size=vocab_size,
+            pad_id=PAD_ID,
+            emb_dim=embedding_dimensions,
+            lr=0.01
+        )
 
-if st.sidebar.button("Train"):
-    train()
-    # st.session_state["model"] = ParagraphEmbedder(vocab_size=vocab_size, emb_dim=embedding_dimensions)
+        st.session_state["trainer"] = L.Trainer(max_epochs=epochs, enable_checkpointing=False, logger=False)
+        st.session_state["trainer"].fit(st.session_state["model"], loader)
 
-# ==================== Model application ====================
-with torch.no_grad():
-    document_embeddings = st.session_state["model"](encoded_documents)
-    question_embeddings = st.session_state["model"](encoded_question)
 
-# ==================== Visualization ====================
-with tab3:
-    points = document_embeddings.numpy()
-    qpoints = question_embeddings.numpy()
-    fig, ax = plt.subplots()
-    ax.set_axis_off()
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(points[:, 0], points[:, 1], points[:, 2], s=80, c='royalblue')
-    ax.scatter(qpoints[:, 0], qpoints[:, 1], qpoints[:, 2], s=80, c='red')
-    for i, point in enumerate(points):
-        ax.text(point[0], point[1], point[2], f"D{i+1}", fontsize=10)
-    ax.text(qpoints[0, 0], qpoints[0, 1], qpoints[0, 2], f"Q", fontsize=10)
-    st.pyplot(fig)
+    if "model" not in st.session_state:
+        train()
+        # st.session_state["model"] = ParagraphEmbedder(vocab_size=vocab_size, emb_dim=embedding_dimensions)
 
-with tab2:
-    st.header("Embeddings der Dokumente")
-    st.write(document_embeddings)
-    st.header("Embeddings der Frage")
-    st.write(question_embeddings)
+    if st.sidebar.button("Train"):
+        train()
+        # st.session_state["model"] = ParagraphEmbedder(vocab_size=vocab_size, emb_dim=embedding_dimensions)
 
-with tab4:
-    fig, ax = plt.subplots()
-    ax.spines['top'].set_visible(False)
-    ax.spines['left'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
+    # ==================== Model application ====================
+    with torch.no_grad():
+        document_embeddings = st.session_state["model"](encoded_documents)
+        question_embeddings = st.session_state["model"](encoded_question)
 
-    all_embeddings = concat([question_embeddings, document_embeddings])
-    st.write(all_embeddings)
-    Z = hierarchy.linkage(all_embeddings, method="ward")
-    hierarchy.dendrogram(Z, orientation='left', ax=ax, labels=["Frage"] + [f"D{i}" for i in range(1, len(all_embeddings))])
-    st.pyplot(fig)
+    # ==================== Visualization ====================
+    with tab3:
+        points = document_embeddings.numpy()
+        qpoints = question_embeddings.numpy()
+        fig, ax = plt.subplots()
+        ax.set_axis_off()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(points[:, 0], points[:, 1], points[:, 2], s=80, c='royalblue')
+        ax.scatter(qpoints[:, 0], qpoints[:, 1], qpoints[:, 2], s=80, c='red')
+        for i, point in enumerate(points):
+            ax.text(point[0], point[1], point[2], f"D{i+1}", fontsize=10)
+        ax.text(qpoints[0, 0], qpoints[0, 1], qpoints[0, 2], f"Q", fontsize=10)
+        st.pyplot(fig)
+
+    with tab2:
+        st.header("Embeddings der Dokumente")
+        st.write(document_embeddings)
+        st.header("Embeddings der Frage")
+        st.write(question_embeddings)
+
+    with tab4:
+        fig, ax = plt.subplots()
+        ax.spines['top'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+
+        all_embeddings = concat([question_embeddings, document_embeddings])
+        st.write(all_embeddings)
+        Z = hierarchy.linkage(all_embeddings, method="ward")
+        hierarchy.dendrogram(Z, orientation='left', ax=ax, labels=["Frage"] + [f"D{i}" for i in range(1, len(all_embeddings))])
+        st.pyplot(fig)
 
 
 fig, ax = plt.subplots()
