@@ -94,7 +94,7 @@ with col2:
         cols = [f"Dimension {i}" for i in range(len(document_embeddings))]
         st.header("Embeddings der Dokumente")
         df1 = DataFrame(document_embeddings)
-        df1.columns(cols)
+        df1.columns = cols
         st.write(df1)
 
         st.header("Embeddings der Frage")
