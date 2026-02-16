@@ -19,11 +19,8 @@ st.set_page_config(
 )
 
 st.sidebar.title("Rafiki Augmented Generation")
-<<<<<<< HEAD
+
 question = st.sidebar.text_area("Frage eingeben", "Junge Löwenprinz Simba aus Der König der Löwen, der Sohn von Mufasa der mit Timon und Pumbaa neue Freunde findet und Herrscher wird.", height="content")
-=======
-question = st.sidebar.text_area("Frage eingeben", "Wer wurde durch das Motto Hakuna Matata bekannt?", height="content")
->>>>>>> a9ac721958e95a2e366fbd7f7d797033dbfab945
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
