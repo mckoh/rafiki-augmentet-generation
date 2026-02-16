@@ -27,6 +27,7 @@ epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 col1, col2 = st.columns([0.3, 0.7])
 
 with col1:
+    st.header("Dokumente")
     doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz der vom sorglosen Jungtier zum verantwortungsvollen Herrscher wird.", height="content")
     doc2 = st.text_area("Dokument 2", "Mufasa ist der König des Geweihten Landes. Er verfügt über eine starke, majestätische Präsenz.", height="content")
     doc3 = st.text_area("Dokument 3", "Scar ist der böse Onkel, der selbst zum König werden will.", height="content")
