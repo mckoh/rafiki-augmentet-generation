@@ -25,7 +25,7 @@ question = st.sidebar.text_area("Frage eingeben", "Der junge Löwenprinz der vom
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
-col1, col2 = st.columns([0.3, 0.7], gap="xlarge")
+col1, col2 = st.columns([0.3, 0.7], gap="large")
 
 with col1:
     st.header("Dokumente")
