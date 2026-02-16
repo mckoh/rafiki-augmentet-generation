@@ -24,7 +24,7 @@ question = st.sidebar.text_area("Frage eingeben", "Der junge Löwenprinz der vom
 embedding_dimensions = st.sidebar.slider("Dimensions", 3, 100, 3)
 epochs = st.sidebar.slider("Epochen", 1, 700, 250)
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([0.3, 0.7])
 
 with col1:
     doc1 = st.text_area("Dokument 1", "Simba ist der junge Löwenprinz der vom sorglosen Jungtier zum verantwortungsvollen Herrscher wird.", height="content")
