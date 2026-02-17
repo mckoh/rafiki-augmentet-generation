@@ -23,11 +23,11 @@ class ParagraphEmbedder(nn.Module):
         x: LongTensor (batch, seq_len)
         Rückgabe: (batch, emb_dim) – Mittelwert über die Sequenz
         """
-        emb = self.embedding(x)          # (batch, seq_len, emb_dim)
-        mask = (x != self.pad_id).unsqueeze(-1)  # (batch, seq_len, 1)
-        emb = emb * mask                 # PADs auf 0 setzen
-        lengths = mask.sum(dim=1).clamp(min=1)  # (batch, 1)
-        sent_emb = emb.sum(dim=1) / lengths    # (batch, emb_dim)
+        emb = self.embedding(x)
+        mask = (x != self.pad_id).unsqueeze(-1)
+        emb = emb * mask
+        lengths = mask.sum(dim=1).clamp(min=1)
+        sent_emb = emb.sum(dim=1) / lengths
         return sent_emb
 
     def training_step(self, batch, batch_idx):
