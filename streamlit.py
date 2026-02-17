@@ -2,10 +2,11 @@ import streamlit as st
 import torch
 import torch.nn as nn
 import lightning as L
-from pandas import DataFrame
 
+from pandas import DataFrame
 from functions import build_vocab, encode, PAD_ID
 from embedder import ParagraphEmbedder, TripletDataset, LightningParagraphEmbedder
+from triplets import SimpleTripletDataset
 from scipy.cluster import hierarchy
 from matplotlib import pyplot as plt
 from numpy import concat
@@ -50,7 +51,7 @@ with col2:
 
 
     def train():
-        dataset = TripletDataset(encoded_documents)
+        dataset = SimpleTripletDataset(encoded_documents)
         loader = DataLoader(dataset, batch_size=vocab_size, shuffle=True)
         st.session_state["model"] = LightningParagraphEmbedder(
             vocab_size=vocab_size,
