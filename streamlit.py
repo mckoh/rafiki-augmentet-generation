@@ -52,7 +52,6 @@ with col2:
 
     def train():
         dataset = SimpleTripletDataset(encoded_documents)
-        st.write(dataset)
         loader = DataLoader(dataset, batch_size=vocab_size, shuffle=True)
         st.session_state["model"] = LightningParagraphEmbedder(
             vocab_size=vocab_size,
