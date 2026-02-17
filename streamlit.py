@@ -5,7 +5,7 @@ import lightning as L
 
 from pandas import DataFrame
 from functions import build_vocab, encode, PAD_ID
-from embedder import ParagraphEmbedder, TripletDataset, LightningParagraphEmbedder
+from embedder import ParagraphEmbedder, LightningParagraphEmbedder
 from triplets import SimpleTripletDataset
 from scipy.cluster import hierarchy
 from matplotlib import pyplot as plt

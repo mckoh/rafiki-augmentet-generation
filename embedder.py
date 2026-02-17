@@ -49,20 +49,6 @@ class ParagraphEmbedder(nn.Module):
         return torch.optim.Adam(self.parameters(), lr=self.lr)
 
 
-class TripletDataset(Dataset):
-    def __init__(self, data):
-        self.data = data
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, idx):
-        anchor = self.data[idx]
-        pos = self.data[(idx + 1) % len(self.data)]
-        neg = self.data[(idx + 2) % len(self.data)]
-        return anchor, pos, neg
-
-
 class LightningParagraphEmbedder(L.LightningModule):
     def __init__(self, vocab_size, pad_id, emb_dim=3, lr=1e-3):
         super().__init__()
