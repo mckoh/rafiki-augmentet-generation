@@ -116,3 +116,10 @@ with col2:
 fig, ax = plt.subplots()
 ax.plot(st.session_state["model"].loss)
 st.sidebar.pyplot(fig)
+
+st.sidebar.markdown(
+    "<div style='text-align:center; color:#999; margin-top:60px;'>"
+    "Made with ❤️ by </BR> Michael Kohlegger (2026)"
+    "</div>",
+    unsafe_allow_html=True
+)
